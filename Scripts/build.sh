@@ -24,6 +24,8 @@ rc0=$?
 echo "Unit test logs"
 cat "$(pwd)/log_unittests.xml"
 # exit if tests failed
+echo "Unity logs"
+cat "$(pwd)/unity.log"
 if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
 
 ## Make the builds
