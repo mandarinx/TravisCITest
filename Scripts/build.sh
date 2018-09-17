@@ -27,6 +27,8 @@ cat "$(pwd)/log_unittests.xml"
 if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
 
 ## Make the builds
+#/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile "$(pwd)/unity.log" -projectPath "$(pwd)/TravisUnityProject" -executeMethod Syng.Builds.Build -quit
+
 echo "Attempting build of ${UNITY_PROJECT_NAME} for iOS"
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \

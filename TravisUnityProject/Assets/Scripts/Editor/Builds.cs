@@ -9,14 +9,12 @@ namespace Syng {
 
         [MenuItem("Syng/Build")]
         public static void Build() {
-//            string srcFolder = Environment.GetEnvironmentVariable("SRC_FOLDER");
-            string prjName = Environment.GetEnvironmentVariable("UNITYCI_PROJECT_NAME");
-            Console.WriteLine($"Source folder: {Application.dataPath}");
+            string prjName = Environment.GetEnvironmentVariable("UNITY_PROJECT_NAME");
+            string targetFolder = Path.GetFullPath(Path.Combine(Application.dataPath, "../../Builds/iOS"));
             Console.WriteLine($"Project name: {prjName}");
+            Console.WriteLine($"Target folder: {targetFolder}");
 
             string[] levels = {"Assets/Scenes/Test.unity"};
-            string targetFolder = Path.Combine(Application.dataPath, "../../Builds", prjName);
-            Console.WriteLine($"Target folder: {targetFolder}");
 
             BuildPipeline.BuildPlayer(levels,
                                       targetFolder,
