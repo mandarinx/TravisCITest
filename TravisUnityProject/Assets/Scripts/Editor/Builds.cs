@@ -15,7 +15,7 @@ namespace Syng {
             Console.WriteLine($"Project name: {prjName}");
 
             string[] levels = {"Assets/Scenes/Test.unity"};
-            string targetFolder = Path.Combine(Application.dataPath, "Builds", prjName);
+            string targetFolder = Path.Combine(Application.dataPath, "../../Builds", prjName);
             Console.WriteLine($"Target folder: {targetFolder}");
 
             BuildPipeline.BuildPlayer(levels,
