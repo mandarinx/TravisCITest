@@ -18,11 +18,11 @@ echo "Running editor unit tests for ${UNITYCI_PROJECT_NAME}"
     -logFile "$(pwd)/unity.log" \
     -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
     -runEditorTests \
-    -editorTestsResultFile "$(pwd)/test.xml"
+    -editorTestsResultFile "$(pwd)/log_unittests.xml"
 
 rc0=$?
 echo "Unit test logs"
-cat "$(pwd)/test.xml"
+cat "$(pwd)/log_unittests.xml"
 # exit if tests failed
 if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
 
