@@ -9,14 +9,14 @@
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ~/Downloads/test.xml
 
 ## Run the editor unit tests
-echo "Running editor unit tests for ${UNITYCI_PROJECT_NAME}"
+echo "Running editor unit tests for ${UNITY_PROJECT_NAME}"
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
     -nographics \
     -silent-crashes \
     -logFile "$(pwd)/unity.log" \
-    -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
+    -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
     -runEditorTests \
     -editorTestsResultFile "$(pwd)/log_unittests.xml"
 
@@ -27,14 +27,14 @@ cat "$(pwd)/log_unittests.xml"
 if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
 
 ## Make the builds
-echo "Attempting build of ${UNITYCI_PROJECT_NAME} for iOS"
+echo "Attempting build of ${UNITY_PROJECT_NAME} for iOS"
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
     -nographics \
     -silent-crashes \
     -logFile "$(pwd)/unity.log" \
-    -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
+    -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
     -executeMethod Syng.Builds.Build \
     -quit
 
