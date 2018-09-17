@@ -28,8 +28,6 @@ if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
 
 ## Make the builds
 echo "Attempting build of ${UNITYCI_PROJECT_NAME} for iOS"
-SRC_FOLDER="$(pwd)" \
-PROJECT_NAME="${UNITYCI_PROJECT_NAME}" \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
     -nographics \
