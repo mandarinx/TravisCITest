@@ -8,7 +8,7 @@
 ## Run the editor unit tests
 echo "Running editor unit tests for ${UNITYCI_PROJECT_NAME}"
 # SRC_FOLDER="/Users/mandarin/Clients/StormFilms/Syng 2/TravisCITest" PROJECT_NAME="TravisCITest" /Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -executeMethod Syng.Builds.Build -quit
-#/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ~/Downloads/test.xml -quit
+#/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ~/Downloads/test.xml
 
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
@@ -18,7 +18,6 @@ echo "Running editor unit tests for ${UNITYCI_PROJECT_NAME}"
     -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
     -runEditorTests \
     -editorTestsResultFile $(pwd)/test.xml \
-    -quit
 
 rc0=$?
 echo "Unit test logs"
