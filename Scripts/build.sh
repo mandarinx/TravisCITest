@@ -16,11 +16,12 @@ echo "Current directory: ${UNITY_PROJECT_NAME}"
 
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 #    -projectPath $(pwd)/${UNITY_PROJECT_NAME} \
+#    -serial ${UNITY_SERIAL} \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
+    -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
     -nographics \
     -silent-crashes \
-    -serial ${UNITY_SERIAL} \
     -logFile $(pwd)/unity.log \
     -runEditorTests \
     -editorTestsResultFile $(pwd)/log_unittests_1.xml
