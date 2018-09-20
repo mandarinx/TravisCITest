@@ -15,6 +15,7 @@ echo "Running editor unit tests for ${UNITY_PROJECT_NAME}"
     -batchmode \
     -nographics \
     -silent-crashes \
+    -serial ${UNITY_SERIAL} \
     -logFile "$(pwd)/unity.log" \
     -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
     -runEditorTests \
@@ -37,6 +38,7 @@ echo "Attempting build of ${UNITY_PROJECT_NAME} for iOS"
     -batchmode \
     -nographics \
     -silent-crashes \
+    -serial ${UNITY_SERIAL} \
     -logFile "$(pwd)/unity.log" \
     -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
     -executeMethod Syng.Builds.Build \
