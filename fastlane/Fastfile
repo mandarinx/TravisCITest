@@ -1,0 +1,129 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do |options|
+
+    disable_automatic_code_signing(
+      path: "Unity-iPhone.xcodeproj",
+      team_id: "Q5L7576G62"
+    )
+
+    set_info_plist_value(
+      path: "./Info.plist",
+      key: "ITSAppUsesNonExemptEncryption",
+      value: false
+    )
+
+    set_info_plist_value(
+      path: "./Info.plist",
+      key: "CFBundleShortVersionString",
+      value: options[:build_number].to_s
+    )
+
+    set_info_plist_value(
+      path: "./Info.plist",
+      key: "CFBundleVersion",
+      value: options[:build_number].to_s
+    )
+
+    register_devices(
+      devices_file: "../../devices.txt"
+    )
+
+    match(
+      readonly: true,
+      clone_branch_directly: true,
+      type: "appstore"
+    )
+
+    update_project_provisioning(
+      xcodeproj: "Unity-iPhone.xcodeproj",
+      target_filter: "Unity-iPhone",
+      profile:ENV["sigh_no.mandarin.travistest_appstore_profile-path"],
+#      profile:ENV["sigh_no.mandarin.travistest_adhoc_profile-path"],
+      build_configuration: "Debug",
+      code_signing_identity: "iPhone Distribution: mandarin (Q5L7576G62)"
+#      code_signing_identity: "iPhone AdHoc: mandarin (Q5L7576G62)"
+    )
+
+    gym(
+      silent: true,
+      clean: true,
+      scheme: "Unity-iPhone",
+      configuration: "Debug",
+      output_name: "TravisTest",
+      skip_profile_detection: true,
+      export_team_id: "Q5L7576G62",
+      codesigning_identity: "iPhone Distribution: mandarin (Q5L7576G62)",
+#      codesigning_identity: "iPhone AdHoc: mandarin (Q5L7576G62)",
+      export_method: "app-store",
+#      export_method: "ad-hoc",
+      export_options:{
+        compileBitcode: false,
+        signingStyle: "manual",
+        provisioningProfiles: {
+          "no.mandarin.travistest": ENV["sigh_no.mandarin.travistest_appstore_profile-name"]
+#          "no.mandarin.travistest": ENV["sigh_no.mandarin.travistest_adhoc_profile-name"]
+        }
+      }
+    )
+
+    pilot(
+      ipa: "TravisTest.ipa"
+    )
+
+    slack(
+      message: "Build succeeded",
+      success: true,
+      payload: {
+        "Version" => options[:build_number].to_s,
+      },
+      # Optional, lets you specify a whitelist of default payloads to include.
+      # Pass an empty array to suppress all the default payloads.
+      # Don't add this key, or pass nil, if you want all the default payloads.
+      # The available default payloads are: `lane`, `test_result`, `git_branch`,
+      # `git_author`, `last_git_commit_message`, `last_git_commit_hash`.
+      default_payloads: [:last_git_commit_message],
+      # Optional, lets you specify any other properties available for attachments
+      # in the slack API (see https://api.slack.com/docs/attachments).
+#      attachment_properties: {
+        # This hash is deep merged with the existing properties set using the
+        # other properties above. This allows your own fields properties to be
+        # appended to the existing fields that were created using the `payload`
+        # property for instance.
+#        thumb_url: "http://example.com/path/to/thumb.png",
+#        fields: [{
+#          title: "My Field",
+#          value: "My Value",
+#          short: true
+#        }]
+#      }
+    )
+  end
+
+  desc "Synchronize certificates"
+  lane :certificates do
+    match(git_branch: "team_mandarin",
+          app_identifier: ["no.mandarin.travistest"],
+          readonly: true,
+          clone_branch_directly: true)
+  end
+
+end

@@ -1,0 +1,10 @@
+git_url("https://github.com/mandarinx/travis-certs")
+git_branch("team_mandarin")
+
+type("adhoc") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier("no.mandarin.travistest")
+username("mandarin@mandarin.no") # Your Apple Developer Portal username
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options

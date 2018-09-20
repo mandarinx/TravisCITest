@@ -1,8 +1,8 @@
 #! /bin/sh
 
 # NOTE the command args below make the assumption that your Unity project folder is
-#  a subdirectory of the repo root directory, e.g. for this repo "unity-ci-test" 
-#  the project folder is "UnityProject". If this is not true then adjust the 
+#  a subdirectory of the repo root directory, e.g. for this repo "unity-ci-test"
+#  the project folder is "UnityProject". If this is not true then adjust the
 #  -projectPath argument to point to the right location.
 
 # SRC_FOLDER="/Users/mandarin/Clients/StormFilms/Syng 2/TravisCITest" PROJECT_NAME="TravisCITest" /Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -executeMethod Syng.Builds.Build -quit
@@ -46,4 +46,8 @@ rc1=$?
 echo "Build logs (iOS)"
 cat "$(pwd)/unity.log"
 
-exit $($rc1)
+# copy fastlane setup to unity project
+cp -R ./fastlane ./Builds/iOS/
+cp Gemfile ./Builds/iOS/
+
+exit $rc1

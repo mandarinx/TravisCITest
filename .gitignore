@@ -1,8 +1,10 @@
 */[Ll]ibrary/
 */[Tt]emp/
 */[Oo]bj/
-*/[Bb]uild/
-*/[Bb]uilds/
+*/[Bb]uild/*
+*/[Bb]uilds/*
+/[Bb]uild/*
+/[Bb]uilds/*
 */Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -35,3 +37,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 .DS_Store
+/TravisUnityProject/.idea
+/log_unittests.xml
+/unity.log
