@@ -19,13 +19,13 @@ echo "Created directory: $(pwd)/Builds"
 
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 #    -serial ${UNITY_SERIAL} \
+#    -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
     -nographics \
     -silent-crashes \
     -logFile $(pwd)/unity.log \
     -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
-    -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
     -runEditorTests \
     -editorTestsResultFile $(pwd)/log_unittests.xml \
     -quit
