@@ -20,8 +20,8 @@ notifications:
 #- openssl aes-256-cbc -k "$KEYFILE_PASS" -in "${UPLOAD_KEYPATH}.enc" -out "${UPLOAD_KEYPATH}" -d
 
 # run the script to download and install Unity editor
-#install:
-#- sudo -E sh ./Scripts/install.sh
+install:
+- sudo -E sh ./Scripts/install.sh
 
 # run the script for unit tests and builds
 script:
