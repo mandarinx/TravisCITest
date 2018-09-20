@@ -10,6 +10,9 @@
 
 ## Run the editor unit tests
 echo "Running editor unit tests for ${UNITY_PROJECT_NAME}"
+echo "Unity serial: ${UNITY_SERIAL}"
+exit 1
+
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
