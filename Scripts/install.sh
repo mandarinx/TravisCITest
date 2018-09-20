@@ -10,9 +10,16 @@ download() {
     file=$1
     url="$BASE_URL/$HASH/$file"
 
-    echo "Downloading $url to `basename "$file"`"
-    curl --retry 5 -o `basename "$file"` "$url"
-    if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
+    if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$file"` ] ; then
+        echo "Downloading `basename "$file"` from $url: "
+        curl --retry 5 -o $UNITY_DOWNLOAD_CACHE/`basename "$file"` "$url"
+    else
+        echo "$file exists in cache. Skipping download."
+    fi
+
+#    echo "Downloading $url to `basename "$file"`"
+#    curl --retry 5 -o `basename "$file"` "$url"
+#    if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 }
 
 install() {

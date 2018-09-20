@@ -11,15 +11,18 @@
 ## Run the editor unit tests
 echo "Running editor unit tests for ${UNITY_PROJECT_NAME}"
 
-cd ${UNITY_PROJECT_NAME}
-echo "Current directory: ${UNITY_PROJECT_NAME}"
+#cd ${UNITY_PROJECT_NAME}
+#echo "Current directory: ${UNITY_PROJECT_NAME}"
+
+mkdir $(pwd)/Builds
+echo "Created directory: $(pwd)/Builds"
 
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
-#    -projectPath $(pwd)/${UNITY_PROJECT_NAME} \
 #    -serial ${UNITY_SERIAL} \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
     -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
+    -projectPath $(pwd)/${UNITY_PROJECT_NAME} \
     -nographics \
     -silent-crashes \
     -logFile $(pwd)/unity.log \
