@@ -6,12 +6,10 @@
 #  -projectPath argument to point to the right location.
 
 # SRC_FOLDER="/Users/mandarin/Clients/StormFilms/Syng 2/TravisCITest" PROJECT_NAME="TravisCITest" /Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -executeMethod Syng.Builds.Build -quit
-#/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ~/Downloads/test.xml
+#/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -serial ... -batchmode -nographics -silent-crashes -logFile ../unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ../test.xml
 
 ## Run the editor unit tests
 echo "Running editor unit tests for ${UNITY_PROJECT_NAME}"
-echo "Unity serial: ${UNITY_SERIAL}"
-exit 1
 
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
@@ -19,17 +17,17 @@ exit 1
     -nographics \
     -silent-crashes \
     -serial ${UNITY_SERIAL} \
-    -logFile "$(pwd)/unity.log" \
-    -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
+    -logFile $(pwd)/unity.log \
+    -projectPath $(pwd)/${UNITY_PROJECT_NAME} \
     -runEditorTests \
-    -editorTestsResultFile "$(pwd)/log_unittests.xml"
+    -editorTestsResultFile $(pwd)/log_unittests.xml
 
 rc0=$?
 echo "Unit test logs"
-cat "$(pwd)/log_unittests.xml"
+cat $(pwd)/log_unittests.xml
 # exit if tests failed
 echo "Unity logs"
-cat "$(pwd)/unity.log"
+cat $(pwd)/unity.log
 if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
 
 ## Make the builds
