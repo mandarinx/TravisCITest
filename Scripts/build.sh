@@ -21,19 +21,20 @@ echo "Created directory: $(pwd)/Builds"
 #    -serial ${UNITY_SERIAL} \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
-    -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
-    -projectPath $(pwd)/${UNITY_PROJECT_NAME} \
     -nographics \
     -silent-crashes \
     -logFile $(pwd)/unity.log \
+    -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
+    -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
     -runEditorTests \
-    -editorTestsResultFile $(pwd)/log_unittests_1.xml
+    -editorTestsResultFile $(pwd)/log_unittests.xml \
+    -quit
 
 rc0=$?
 echo "Unit test logs"
-cat $(pwd)/log_unittests_1.xml
-echo "Unity logs"
-cat $(pwd)/unity.log
+cat $(pwd)/log_unittests.xml
+#echo "Unity logs"
+#cat $(pwd)/unity.log
 
 # exit if tests failed
 if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
