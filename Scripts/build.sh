@@ -26,6 +26,7 @@ activateLicense() {
         -serial ${UNITY_SERIAL} \
         -username ${UNITY_USER} \
         -password ${UNITY_PWD} \
+        -batchmode \
         -noUpm \
         -quit
     echo "[SYNG2] Unity activation log"
@@ -94,7 +95,7 @@ fastlaneRun() {
 
 # ------------------------------------------------------------------------------
 
-returnLicense
+#returnLicense
 activateLicense
 unitTests
 prepareBuilds
