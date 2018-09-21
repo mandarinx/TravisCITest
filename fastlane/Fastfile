@@ -18,6 +18,9 @@ default_platform(:ios)
 platform :ios do
 
   desc "Push a new beta build to TestFlight"
+
+  # could use ENV["TRAVIS_BUILD_NUMBER"] for automatic versioning?
+
   lane :beta do |options|
 
     disable_automatic_code_signing(

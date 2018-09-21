@@ -24,7 +24,7 @@ cache:
 
 # decrypt the encrypted SSH key file so it can be used for scp auth in post_build.sh
 before_install:
-- chmod 755 ${UNITY_DOWNLOAD_CACHE}
+- sudo -E sh ./Scripts/before_install.sh
 - openssl aes-256-cbc -K $encrypted_39d2f26b7fec_key -iv $encrypted_39d2f26b7fec_iv -in Unity_v2017.x.ulf.enc -out ./Unity_v2017.x.ulf -d
 #- export UNITY_LICENSE_CONTENT=`cat Unity_v2017.x.ulf`
 #- rm Unity_v2017.x.ulf
