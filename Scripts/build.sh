@@ -8,6 +8,20 @@
 # SRC_FOLDER="/Users/mandarin/Clients/StormFilms/Syng 2/TravisCITest" PROJECT_NAME="TravisCITest" /Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -executeMethod Syng.Builds.Build -quit
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -serial ... -batchmode -nographics -silent-crashes -logFile ../unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ../test.xml
 
+echo "Activate Unity"
+/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
+    -logFile $(pwd)/unity.activation.log \
+    -nographics \
+    -batchmode \
+    -serial ${UNITY_SERIAL} \
+    -username ${UNITY_USER} \
+    -password ${UNITY_PWD} \
+    -quit
+
+#/Applications/Unity/Unity.app/Contents/MacOS/Unity -logfile $(pwd)/unity.activation.log & sleep 15
+cat $(pwd)/unity.activation.log
+exit 1
+
 ## Run the editor unit tests
 echo "Running editor unit tests for ${UNITY_PROJECT_NAME}"
 
@@ -18,7 +32,6 @@ mkdir $(pwd)/Builds
 echo "Created directory: $(pwd)/Builds"
 
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
-#    -serial ${UNITY_SERIAL} \
 #    -manualLicenseFile $(pwd)/Unity_v2017.x.ulf \
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
     -batchmode \
