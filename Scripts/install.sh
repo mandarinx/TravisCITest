@@ -6,28 +6,32 @@ BASE_URL=https://netstorage.unity3d.com/unity
 HASH=ae1180820377
 VERSION=2018.2.8f1
 
+getFileName() {
+    echo "${UNITY_DOWNLOAD_CACHE}/`basename "$1"`"
+}
+
 download() {
     file=$1
     url="$BASE_URL/$HASH/$file"
+    filePath=$(getFileName $file)
+    fileName=`basename "$file"`
 
-    if [ ! -e ${UNITY_DOWNLOAD_CACHE}/`basename "$file"` ] ; then
-        echo "Downloading `basename "$file"` from $url: "
-        curl --retry 5 -o ${UNITY_DOWNLOAD_CACHE}/`basename "$file"` "$url"
+    if [ ! -e $filePath ] ; then
+        echo "Downloading $filePath from $url: "
+        curl --retry 5 -o "$filePath" "$url"
     else
         echo "$file exists in cache. Skipping download."
     fi
-
-#    echo "Downloading $url to `basename "$file"`"
-#    curl --retry 5 -o `basename "$file"` "$url"
-#    if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 }
 
 install() {
     package=$1
+    filePath=$(getFileName $package)
+
     download "$package"
 
-    echo "Installing ${UNITY_DOWNLOAD_CACHE}/`basename "$package"`"
-    sudo installer -dumplog -package ${UNITY_DOWNLOAD_CACHE}/`basename "$package"` -target /
+    echo "Installing $filePath"
+    sudo installer -dumplog -package "$filePath" -target /
 
 }
 
