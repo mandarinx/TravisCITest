@@ -20,7 +20,7 @@ download() {
         echo "Downloading $filePath from $url: "
         curl --retry 5 -o "$filePath" "$url"
     else
-        echo "$file exists in cache. Skipping download."
+        echo "$fileName exists in cache. Skipping download."
     fi
 }
 
