@@ -8,18 +8,35 @@
 # SRC_FOLDER="/Users/mandarin/Clients/StormFilms/Syng 2/TravisCITest" PROJECT_NAME="TravisCITest" /Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -batchmode -nographics -silent-crashes -logFile ~/Downloads/unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -executeMethod Syng.Builds.Build -quit
 #/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity -serial ... -batchmode -nographics -silent-crashes -logFile ../unity.log -projectPath /Users/mandarin/Clients/StormFilms/Syng\ 2/TravisCITest/TravisUnityProject -runEditorTests -editorTestsResultFile ../test.xml
 
-echo "Activate Unity"
-/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity \
-    -logFile $(pwd)/unity.activation.log \
+if [ -z "${CI}" ]; then
+    UNITY_PATH="/Applications/Unity/Hub/Editor/2018.2.8f1/Unity.app/Contents/MacOS/Unity"
+else
+    UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
+fi
+
+echo "[SYNG2] Activate Unity"
+echo ${UNITY_PATH}
+
+${UNITY_PATH} \
+    -logFile "$(pwd)/unity.activation.log" \
     -nographics \
     -batchmode \
     -serial ${UNITY_SERIAL} \
     -username ${UNITY_USER} \
     -password ${UNITY_PWD} \
     -quit
+cat "$(pwd)/unity.activation.log"
 
-#/Applications/Unity/Unity.app/Contents/MacOS/Unity -logfile $(pwd)/unity.activation.log & sleep 15
-cat $(pwd)/unity.activation.log
+echo "[SYNG2] Return license"
+
+${UNITY_PATH} \
+    -logFile "$(pwd)/unity.returnlicense.log" \
+    -nographics \
+    -batchmode \
+    -returnlicense \
+    -quit
+cat "$(pwd)/unity.returnlicense.log"
+
 exit 1
 
 ## Run the editor unit tests
