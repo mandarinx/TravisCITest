@@ -17,9 +17,9 @@ fi
 echo "[SYNG2] Activate Unity"
 echo ${UNITY_PATH}
 
+    #-nographics \
 ${UNITY_PATH} \
     -logFile "$(pwd)/unity.activation.log" \
-    -nographics \
     -batchmode \
     -serial ${UNITY_SERIAL} \
     -username ${UNITY_USER} \
@@ -29,9 +29,9 @@ cat "$(pwd)/unity.activation.log"
 
 echo "[SYNG2] Return license"
 
+    #-nographics \
 ${UNITY_PATH} \
     -logFile "$(pwd)/unity.returnlicense.log" \
-    -nographics \
     -batchmode \
     -returnlicense \
     -quit
