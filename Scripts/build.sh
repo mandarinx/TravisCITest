@@ -12,7 +12,6 @@ returnLicense() {
 
     ${UNITY_PATH} \
         -logFile "$(pwd)/unity.returnlicense.log" \
-        -batchmode \
         -returnlicense \
         -quit
     cat "$(pwd)/unity.returnlicense.log"
@@ -23,7 +22,6 @@ activateLicense() {
 
     ${UNITY_PATH} \
         -logFile "$(pwd)/unity.activation.log" \
-        -batchmode \
         -serial ${UNITY_SERIAL} \
         -username ${UNITY_USER} \
         -password ${UNITY_PWD} \
