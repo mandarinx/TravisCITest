@@ -18,6 +18,7 @@ cache:
 
 # decrypt the encrypted SSH key file so it can be used for scp auth in post_build.sh
 before_install:
+- bundle update fastlane
 - sudo -E sh ./Scripts/before_install.sh
 #- openssl aes-256-cbc -k "$KEYFILE_PASS" -in "${UPLOAD_KEYPATH}.enc" -out "${UPLOAD_KEYPATH}" -d
 

@@ -13,6 +13,7 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+fastlane_version "2.105.1"
 default_platform(:ios)
 
 platform :ios do
@@ -70,7 +71,8 @@ platform :ios do
       keychain_password: ENV["MATCH_PASSWORD"],
       readonly: true,
       clone_branch_directly: true,
-      type: "appstore"
+      type: "appstore",
+      force_for_new_devices: true
     )
 
     update_project_provisioning(
