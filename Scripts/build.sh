@@ -11,7 +11,7 @@ returnLicense() {
     echo "[SYNG2] Return license"
 
     ${UNITY_PATH} \
-        -logFile "$(pwd)/unity.returnlicense.log" \
+        -logFile "${TRAVIS_BUILD_DIR}/unity.returnlicense.log" \
         -batchmode \
         -returnlicense \
         -quit
@@ -22,7 +22,7 @@ activateLicense() {
     echo "[SYNG2] Activate Unity"
 
     ${UNITY_PATH} \
-        -logFile "$(pwd)/unity.activation.log" \
+        -logFile "${TRAVIS_BUILD_DIR}/unity.activation.log" \
         -serial ${UNITY_SERIAL} \
         -username ${UNITY_USER} \
         -password ${UNITY_PWD} \
@@ -30,7 +30,7 @@ activateLicense() {
         -noUpm \
         -quit
     echo "[SYNG2] Unity activation log"
-    cat "$(pwd)/unity.activation.log"
+    cat "${TRAVIS_BUILD_DIR}/unity.activation.log"
 }
 
 unitTests() {
@@ -42,14 +42,14 @@ unitTests() {
         -serial ${UNITY_SERIAL} \
         -username ${UNITY_USER} \
         -password ${UNITY_PWD} \
-        -logFile "./unity.unittests.log" \
-        -projectPath "./${UNITY_PROJECT_NAME}/" \
+        -logFile "${TRAVIS_BUILD_DIR}/unity.unittests.log" \
+        -projectPath "${TRAVIS_BUILD_DIR}/${UNITY_PROJECT_NAME}/" \
         -runEditorTests \
         -editorTestsResultFile "../unity.unittests.xml"
 
     rc0=$?
     echo "[SYNG2] Unit test log"
-    cat "$(pwd)/unity.unittests.xml"
+    cat "${TRAVIS_BUILD_DIR}/unity.unittests.xml"
 
     # exit if tests failed
     if [ $rc0 -ne 0 ]; then { echo "[SYNG2] Unit tests failed"; exit $rc0; } fi
@@ -58,7 +58,7 @@ unitTests() {
 prepareBuilds() {
     echo "[SYNG2] Preparing building"
 
-    BUILD_PATH=$(pwd)/Builds
+    BUILD_PATH=${TRAVIS_BUILD_DIR}/Builds
     mkdir ${BUILD_PATH}
     echo "[SYNG2] Created directory: ${BUILD_PATH}"
 }
@@ -66,19 +66,18 @@ prepareBuilds() {
 buildiOS() {
     echo "[SYNG2] Building ${UNITY_PROJECT_NAME} for iOS"
 
-    # should pass ${BUILD_PATH} to build method
-
     ${UNITY_PATH} \
         -batchmode \
         -silent-crashes \
-        -logFile "$(pwd)/unity.build.ios.log" \
-        -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
+        -logFile "${TRAVIS_BUILD_DIR}/unity.build.ios.log" \
+        -projectPath "${TRAVIS_BUILD_DIR}/${UNITY_PROJECT_NAME}" \
         -executeMethod Syng.Builds.Build \
+        -syngBuildPath "${BUILD_PATH}/iOS" \
         -quit
 
     rc1=$?
     echo "[SYNG2] Build logs (iOS)"
-    cat "$(pwd)/unity.build.ios.log"
+    cat "${TRAVIS_BUILD_DIR}/unity.build.ios.log"
 
     # exit if build failed
     if [ $rc1 -ne 0 ]; then { echo "[SYNG2] Build failed"; exit $rc1; } fi
