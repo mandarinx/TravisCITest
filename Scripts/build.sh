@@ -50,8 +50,6 @@ unitTests() {
     rc0=$?
     echo "[SYNG2] Unit test log"
     cat "$(pwd)/unity.unittests.xml"
-#    echo "[SYNG2] Unity unit test run log"
-#    cat "$(pwd)/unity.unittests.log"
 
     # exit if tests failed
     if [ $rc0 -ne 0 ]; then { echo "[SYNG2] Unit tests failed"; exit $rc0; } fi
