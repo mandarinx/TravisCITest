@@ -12,6 +12,7 @@ returnLicense() {
 
     ${UNITY_PATH} \
         -logFile "$(pwd)/unity.returnlicense.log" \
+        -batchmode \
         -returnlicense \
         -quit
     cat "$(pwd)/unity.returnlicense.log"
