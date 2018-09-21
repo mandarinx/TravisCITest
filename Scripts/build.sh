@@ -16,24 +16,28 @@ ${UNITY_PATH} \
     -serial ${UNITY_SERIAL} \
     -username ${UNITY_USER} \
     -password ${UNITY_PWD} \
+    -noUpm \
     -quit
+echo "[SYNG2] Unity activation log"
 cat "$(pwd)/unity.activation.log"
 
 # ------------------------------------------------------------------------------
 echo "[SYNG2] Running editor unit tests for ${UNITY_PROJECT_NAME}"
 
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+${UNITY_PATH} \
     -batchmode \
     -silent-crashes \
-    -logFile "$(pwd)/unity.log" \
-    -projectPath "$(pwd)/${UNITY_PROJECT_NAME}" \
+    -logFile "./unity.unittests.log" \
+    -projectPath "./${UNITY_PROJECT_NAME}/" \
     -runEditorTests \
-    -editorTestsResultFile "$(pwd)/unity.unittests.xml" \
+    -editorTestsResultFile "../unity.unittests.xml" \
     -quit
 
 rc0=$?
-echo "[SYNG2] Unit test logs"
+echo "[SYNG2] Unit test log"
 cat "$(pwd)/unity.unittests.xml"
+echo "[SYNG2] Unity unit test run log"
+cat "$(pwd)/unity.unittests.log"
 
 # exit if tests failed
 if [ $rc0 -ne 0 ]; then { echo "[SYNG2] Unit tests failed"; exit $rc0; } fi
@@ -51,7 +55,7 @@ echo "[SYNG2] Building ${UNITY_PROJECT_NAME} for iOS"
 
 # should pass ${BUILD_PATH} to build method
 
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+${UNITY_PATH} \
     -batchmode \
     -silent-crashes \
     -logFile "$(pwd)/unity.build.ios.log" \
