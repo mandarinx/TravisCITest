@@ -87,6 +87,8 @@ fastlaneRun() {
     echo "[SYNG2] Copy fastlane setup to iOS project"
     cp -R ./fastlane ${BUILD_PATH}/iOS/
     cp Gemfile ${BUILD_PATH}/iOS/
+
+    fastlane beta build_number:${TRAVIS_BUILD_NUMBER}
 }
 
 # ------------------------------------------------------------------------------
