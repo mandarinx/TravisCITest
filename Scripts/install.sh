@@ -10,9 +10,9 @@ download() {
     file=$1
     url="$BASE_URL/$HASH/$file"
 
-    if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$file"` ] ; then
+    if [ ! -e ${UNITY_DOWNLOAD_CACHE}/`basename "$file"` ] ; then
         echo "Downloading `basename "$file"` from $url: "
-        curl --retry 5 -o $UNITY_DOWNLOAD_CACHE/`basename "$file"` "$url"
+        curl --retry 5 -o ${UNITY_DOWNLOAD_CACHE}/`basename "$file"` "$url"
     else
         echo "$file exists in cache. Skipping download."
     fi
@@ -26,8 +26,8 @@ install() {
     package=$1
     download "$package"
 
-    echo "Installing "`basename "$package"`
-    sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$package"` -target /
+    echo "Installing ${UNITY_DOWNLOAD_CACHE}/`basename "$package"`"
+    sudo installer -dumplog -package ${UNITY_DOWNLOAD_CACHE}/`basename "$package"` -target /
 
 }
 
