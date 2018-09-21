@@ -15,9 +15,6 @@ notifications:
     on_success: never
 #    on_failure: change
 
-env:
-- UNITY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
-
 cache:
   directories:
   - $UNITY_DOWNLOAD_CACHE
@@ -45,6 +42,7 @@ script:
 # environment variables used in bash scripts
 env:
   global:
+  - UNITY_DOWNLOAD_CACHE="${TRAVIS_BUILD_DIR}/unity_download_cache"
   - UNITY_PROJECT_NAME="TravisUnityProject"
   - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV"
   - secure: "FL6gzxPnmfvenZ99sE4Fk+VVT+xVBo9FIqsPJTR4IJRAVUuSmdLBkmj5tsaQoTIT+Ry5BF9VGkMNE64BYnpRa/FV0vHskJlY4EmJ3gYOIgBcgulwVaZuvGZr9VHCvVuCqcXnMQoyOkJqC3OtmRQ/XAbcjcBJ8C43CPKnG4cOvk4VwbnjoRuB2oNGlv1o8sDHKZiQaQJl+9ShafjhrW3WrlaHK92WDz7KBacPOZqd0L3wq6kdsy0BWFXyihRhs5Ddcuw9eVerzQ63vWU0u7vKbKrURtwO7SuY4/fJWR1LvGpPqRNCwg+iNVGsUTjWyUxkPVyRRr71UuOmbx9z8MQJFNNnOU12836pKczVSDs5av0Khkg+BFF7RCQDjNNwErgjbONehlD2T+lwBKWXnNGAlttEpeiFHEqMVoj0d13gnrjLclRhmHwqXl+hB6hc7J7gUv9dz/2urKJ24n17PMeW+Hp7KlVXEn9bHFFoWvsUDgVaew1EbL485jRHqFD5Xzg9KISrNupg5PD23TZskeceouZheIMvgYHonmNo0M5TSsCR/VD1eGURusX3hAEj+0OuSQBAcmyej5D/gS2J1z2q+yt0zW39ob2bHOVKAhR4XYqq6zKcCDxrYfC4Ic+xN4FNIBVyLpKKyvWsFqTkQ21S35bcpBXG51mDkJuZrZH+ATc="
