@@ -42,6 +42,7 @@ script:
 # environment variables used in bash scripts
 env:
   global:
+  - UNITY_NOPROXY="localhost,127.0.0.1"
   - UNITY_DOWNLOAD_CACHE="${TRAVIS_BUILD_DIR}/unity_download_cache"
   - UNITY_PROJECT_NAME="TravisUnityProject"
   - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV"
