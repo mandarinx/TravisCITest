@@ -42,7 +42,7 @@ platform :ios do
   lane :beta do |options|
 
     disable_automatic_code_signing(
-      path: "Unity-iPhone.xcodeproj",
+      path: options[:project_path] + "Unity-iPhone.xcodeproj",
       team_id: "Q5L7576G62"
     )
 
@@ -78,7 +78,7 @@ platform :ios do
     )
 
     update_project_provisioning(
-      xcodeproj: "Unity-iPhone.xcodeproj",
+      xcodeproj: options[:project_path] + "Unity-iPhone.xcodeproj",
       target_filter: "Unity-iPhone",
       profile:ENV["sigh_no.mandarin.travistest_appstore_profile-path"],
 #      profile:ENV["sigh_no.mandarin.travistest_adhoc_profile-path"],
