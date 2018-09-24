@@ -89,7 +89,7 @@ fastlaneRun() {
 #    cp Gemfile ${BUILD_PATH}/iOS/
 #    cp Gemfile.lock ${BUILD_PATH}/iOS/
 
-    fastlane beta build_number:${TRAVIS_BUILD_NUMBER} project_path:${BUILD_PATH}/iOS/
+    fastlane beta build_number:${TRAVIS_BUILD_NUMBER} project_path:${BUILD_PATH}/iOS/ build_root:${TRAVIS_BUILD_DIR}
 }
 
 # ------------------------------------------------------------------------------

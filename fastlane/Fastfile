@@ -47,25 +47,25 @@ platform :ios do
     )
 
     set_info_plist_value(
-      path: "./Info.plist",
+      path: options[:project_path] + "Info.plist",
       key: "ITSAppUsesNonExemptEncryption",
       value: false
     )
 
     set_info_plist_value(
-      path: "./Info.plist",
+      path: options[:project_path] + "Info.plist",
       key: "CFBundleShortVersionString",
       value: options[:build_number].to_s
     )
 
     set_info_plist_value(
-      path: "./Info.plist",
+      path: options[:project_path] + "Info.plist",
       key: "CFBundleVersion",
       value: options[:build_number].to_s
     )
 
     register_devices(
-      devices_file: "../../devices.txt"
+      devices_file: options[:build_root] + "devices.txt"
     )
 
     match(
