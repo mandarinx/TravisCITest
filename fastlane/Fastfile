@@ -15,7 +15,7 @@
 
 fastlane_version "2.105.2"
 default_platform(:ios)
-
+setup_travis
 platform :ios do
 
   # before_all do |lane, options|
@@ -41,17 +41,17 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do |options|
 
-    def ensure_temp_keychain(name)
-      delete_keychain(
-        name: name
-      ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
-      create_keychain(
-        name: name,
-        password: ENV["MATCH_KEYCHAIN_PASSWORD"],
-        unlock: true,
-        timeout: false
-      )
-    end
+    # def ensure_temp_keychain(name)
+    #   delete_keychain(
+    #     name: name
+    #   ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+    #   create_keychain(
+    #     name: name,
+    #     password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+    #     unlock: true,
+    #     timeout: false
+    #   )
+    # end
 
     disable_automatic_code_signing(
       path: options[:project_path] + "Unity-iPhone.xcodeproj",
@@ -77,13 +77,14 @@ platform :ios do
     )
 
     register_devices(
-      devices_file: options[:build_root] + "devices.txt"
+      devices_file: options[:build_root] + "devices.txt",
+      team_id: "Q5L7576G62"
     )
 
-    ensure_temp_keychain ENV["MATCH_KEYCHAIN_NAME"]
+    # ensure_temp_keychain ENV["MATCH_KEYCHAIN_NAME"]
 
     # import apple worldwide developer cert
-    sh("security import #{options[:build_root]}Certs/apple.cer -k ~/Library/Keychains/#{ENV["MATCH_KEYCHAIN_NAME"]}-db -T /usr/bin/codesign")
+    # sh("security import #{options[:build_root]}Certs/apple.cer -k ~/Library/Keychains/#{ENV["MATCH_KEYCHAIN_NAME"]}-db -T /usr/bin/codesign")
 
     match(
       keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
