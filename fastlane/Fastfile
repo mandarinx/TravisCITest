@@ -47,7 +47,7 @@ platform :ios do
       ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
       create_keychain(
         name: name,
-        password: SecureRandom.base64,
+        password: ENV["MATCH_KEYCHAIN_PASSWORD"],
         unlock: true,
         timeout: false
       )
@@ -84,7 +84,7 @@ platform :ios do
 
     match(
       keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
-      # keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
       readonly: true,
       clone_branch_directly: true,
       type: "appstore",

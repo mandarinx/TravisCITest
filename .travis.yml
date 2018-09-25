@@ -2,6 +2,7 @@
 language: generic
 
 os: osx
+osx_image: xcode10
 
 branches:
   only:
