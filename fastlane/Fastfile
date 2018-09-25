@@ -15,7 +15,6 @@
 
 fastlane_version "2.105.2"
 default_platform(:ios)
-setup_travis
 platform :ios do
 
   # before_all do |lane, options|
@@ -40,6 +39,8 @@ platform :ios do
 
   desc "Push a new beta build to TestFlight"
   lane :beta do |options|
+
+    setup_travis
 
     # def ensure_temp_keychain(name)
     #   delete_keychain(
