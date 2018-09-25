@@ -29,7 +29,7 @@ platform :ios do
       unlock: true,
       # lock_when_sleeps: true,
       timeout: 3600,
-      add_to_search_list: true,
+      # add_to_search_list: true,
       verbose: true
     )
   end
