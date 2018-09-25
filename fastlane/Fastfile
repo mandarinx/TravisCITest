@@ -18,21 +18,19 @@ default_platform(:ios)
 
 platform :ios do
 
-  before_all do |lane, options|
-    create_keychain(
-      name: 'testKeychain',
-      password: '1234abcd',
-      # name: ENV["MATCH_KEYCHAIN_NAME"],
-      # password: ENV["MATCH_KEYCHAIN_PASSWORD"],
-      # password: SecureRandom.base64,
-      default_keychain: true,
-      unlock: true,
-      # lock_when_sleeps: true,
-      timeout: 3600,
-      # add_to_search_list: true,
-      verbose: true
-    )
-  end
+  # before_all do |lane, options|
+  #   create_keychain(
+  #     name: ENV["MATCH_KEYCHAIN_NAME"],
+  #     password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+  #     # password: SecureRandom.base64,
+  #     default_keychain: true,
+  #     unlock: true,
+  #     # lock_when_sleeps: true,
+  #     timeout: 3600,
+  #     # add_to_search_list: true,
+  #     verbose: true
+  #   )
+  # end
 
   after_all do |lane|
     delete_keychain(
@@ -42,6 +40,18 @@ platform :ios do
 
   desc "Push a new beta build to TestFlight"
   lane :beta do |options|
+
+    def ensure_temp_keychain(name)
+      delete_keychain(
+        name: name
+      ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+      create_keychain(
+        name: name,
+        password: SecureRandom.base64,
+        unlock: true,
+        timeout: false
+      )
+    end
 
     disable_automatic_code_signing(
       path: options[:project_path] + "Unity-iPhone.xcodeproj",
@@ -70,10 +80,10 @@ platform :ios do
       devices_file: options[:build_root] + "devices.txt"
     )
 
+    ensure_temp_keychain ENV["MATCH_KEYCHAIN_NAME"]
+
     match(
-      keychain_name: 'testKeychain',
-      keychain_password: '1234abcd',
-      # keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
+      keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
       # keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
       readonly: true,
       clone_branch_directly: true,
