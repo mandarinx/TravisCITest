@@ -13,7 +13,7 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-fastlane_version "2.105.1"
+fastlane_version "2.105.2"
 default_platform(:ios)
 
 platform :ios do
@@ -82,13 +82,17 @@ platform :ios do
 
     ensure_temp_keychain ENV["MATCH_KEYCHAIN_NAME"]
 
+    # import apple worldwide developer cert
+    sh("security import #{options[:build_root]}Certs/apple.cer -k ~/Library/Keychains/#{ENV["MATCH_KEYCHAIN_NAME"]}-db -T /usr/bin/codesign")
+
     match(
       keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
       readonly: true,
       clone_branch_directly: true,
       type: "appstore",
-      force_for_new_devices: true
+      force_for_new_devices: true,
+      # verbose: true
     )
 
     update_project_provisioning(
@@ -105,6 +109,7 @@ platform :ios do
       silent: true,
       clean: true,
       scheme: "Unity-iPhone",
+      project: options[:project_path] + "Unity-iPhone.xcodeproj",
       configuration: "Debug",
       output_name: "TravisTest",
       skip_profile_detection: true,

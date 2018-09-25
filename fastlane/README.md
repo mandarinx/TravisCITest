@@ -16,11 +16,6 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios slck
-```
-fastlane ios slck
-```
-
 ### ios beta
 ```
 fastlane ios beta
@@ -31,11 +26,6 @@ Push a new beta build to TestFlight
 fastlane ios certificates
 ```
 Synchronize certificates
-### ios release
-```
-fastlane ios release
-```
-
 
 ----
 

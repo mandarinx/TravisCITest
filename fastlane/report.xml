@@ -5,12 +5,67 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.030816">
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.00939">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: slack" time="0.280958">
+      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.004512">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="02: automatic_code_signing" time="0.544132">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="03: set_info_plist_value" time="0.011658">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="04: set_info_plist_value" time="0.011113">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="05: set_info_plist_value" time="0.010835">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: register_devices" time="4.339215">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: delete_keychain" time="0.029252">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: create_keychain" time="0.137244">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: security import /Users/mandarin/Clients/StormFilms/Syng2/TravisCITest/Certs/apple.cer -k ~/Library/Keychains/travisTest-db -T /usr/bin/codesign" time="0.061371">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: match" time="1.989151">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: update_project_provisioning" time="0.48533">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: gym" time="16.725793">
         
       </testcase>
     
